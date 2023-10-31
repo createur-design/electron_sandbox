@@ -14,3 +14,11 @@ const cpu = async () => {
 };
 
 cpu();
+
+const info = async (data) => {
+  //   console.log(log);
+  const response = await window.versions.info();
+  console.log(`Info CPU ${JSON.stringify(response[1])})`);
+};
+
+info();
