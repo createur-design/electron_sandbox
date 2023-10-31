@@ -19,7 +19,9 @@
   "license": "MIT",
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
-    "os-utils": "^0.0.14"
+    "os-utils": "^0.0.14",
+    "osx-temperature-sensor": "^1.0.8",
+    "systeminformation": "^5.21.15"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.4.2",

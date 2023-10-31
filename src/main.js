@@ -4,6 +4,7 @@ const path = require("path");
 
 const os = require("os-utils");
 const os_node = require("node:os");
+const si = require("systeminformation");
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -52,11 +53,16 @@ app.on("activate", () => {
 app.whenReady().then(() => {
   console.log(os_node.cpus());
   ipcMain.handle("info", () => os_node.cpus());
-  os.cpuUsage(function (v) {
-    console.log("CPU Usage (%): " + v);
-    ipcMain.handle("cpu", () => v);
+  ipcMain.handle("cpu", async () => {
+    os.cpuUsage(function (v) {
+      console.log("CPU Usage (%): " + v);
+      return v;
+    });
   });
   ipcMain.handle("ping", () => "pong");
+  setInterval(() => {
+    si.cpuTemperature().then((data) => console.log(data));
+  }, 1000);
 });
 
 // In this file you can include the rest of your app's specific main process
